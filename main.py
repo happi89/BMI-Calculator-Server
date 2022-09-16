@@ -3,25 +3,34 @@ from pydantic import BaseModel
 
 app = FastAPI()
 
-class Msg(BaseModel):
-    msg: str
+origins = [
+    "https://bmi-calculator-fawn.vercel.app",
+    "http://localhost",
+    "http://localhost:3000",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
-@app.get("/")
-async def root():
-    return {"message": "Hello World. Welcome to FastAPI!"}
-
-
-@app.get("/path")
-async def demo_get():
-    return {"message": "This is /path endpoint, use a post request to transform the text to uppercase"}
-
-
-@app.post("/path")
-async def demo_post(inp: Msg):
-    return {"message": inp.msg.upper()}
-
-
-@app.get("/path/{path_id}")
-async def demo_get_path_id(path_id: int):
-    return {"message": f"This is /path/{path_id} endpoint, use post request to retrieve result"}
+@app.post("/calculate-bmi")
+def update_item(weight: float, height: float):
+  print(height, weight)
+  BMI = round((weight / (height * height)), 1)
+  Category = '';
+  
+  if(BMI > 30):
+    Category = 'Obesity'
+  elif(BMI > 25):
+    Category = 'Overweight'
+  elif(BMI > 18.5):
+    Category = 'Normal weight'
+  else:
+    Category = 'Underweight'
+  
+  return {"BMI": BMI, "category": Category}
