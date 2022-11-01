@@ -23,9 +23,9 @@ app.add_middleware(
 def update_item(weight: float, height: float, unit: boolean):
   BMI = 0
 
-  if unit:
+  if unit == true:
     BMI = round((weight / (height * height)), 1)
-  elif !unit: 
+  elif unit == false: 
     Bmi = round((weight / height ** 2) * 703, 1)
 
   Category = '';
