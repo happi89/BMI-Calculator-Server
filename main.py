@@ -26,7 +26,7 @@ def update_item(weight: float, height: float, unit: boolean):
   if unit == true:
     BMI = round((weight / (height * height)), 1)
   elif unit == false: 
-    Bmi = round((weight / height ** 2) * 703, 1)
+    BMI = round((weight / height ** 2) * 703, 1)
 
   Category = '';
   
