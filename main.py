@@ -20,9 +20,14 @@ app.add_middleware(
 
 
 @app.post("/calculate-bmi")
-def update_item(weight: float, height: float):
-  print(height, weight)
-  BMI = round((weight / (height * height)), 1)
+def update_item(weight: float, height: float, unit: boolean):
+  BMI = 0
+
+  if unit:
+    BMI = round((weight / (height * height)), 1)
+  elif !unit: 
+    Bmi = round((weight / height ** 2) * 703, 1)
+
   Category = '';
   
   if(BMI > 30):
