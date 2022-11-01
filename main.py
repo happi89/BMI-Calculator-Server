@@ -20,7 +20,7 @@ app.add_middleware(
 
 
 @app.post("/calculate-bmi")
-def update_item(weight: float, height: float, unit: boolean):
+def update_item(weight: float, height: float, unit: bool):
   BMI = 0
 
   if unit == true:
